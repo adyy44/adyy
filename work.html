@@ -22,7 +22,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'DM Sans', sans-serif;
-    font-weight: 400;
+    font-weight: 300;
     overflow-x: hidden;
   }
 
@@ -179,6 +179,18 @@
   }
 
   /* ── VIDEO GRIDS ── */
+
+  /* YouTube branding overlay - hides top bar with channel name/pfp */
+  .video-item::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40px;
+    background: var(--surface);
+    z-index: 2;
+    pointer-events: none;
+  }
+
   /* Large 2-col for landscape */
   .video-grid-2 {
     display: grid;
@@ -344,8 +356,8 @@
   <a href="index.html" class="nav-logo">ADYY<span>.</span></a>
   <div class="nav-right">
     <a href="index.html" class="nav-back">
-      <span data-lang="en">HomePage</span>
-      <span data-lang="it">HomePage</span>
+      <span data-lang="en">Case Study</span>
+      <span data-lang="it">Case Study</span>
     </a>
     <div class="lang-btns">
       <button class="lang-btn" onclick="setLang('en')">EN</button>

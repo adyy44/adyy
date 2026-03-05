@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADYY — Lavori</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --text: #f0ede6;
+    --red: #e02020;
+    --red-light: #ff3333;
+    --mid: #888;
+    --surface: #161616;
+    --border: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 48px;
+    height: 52px;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: 6px;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-back {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #444;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-back:hover { color: var(--text); }
+  .nav-back::before { content: '← '; }
+
+  .lang-btns { display: flex; gap: 2px; }
+
+  .lang-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 6px 14px;
+    border: 1px solid #333;
+    background: var(--surface);
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .lang-btn.active {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    margin-top: 52px;
+    padding: 80px 48px 60px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 100px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    color: var(--text);
+  }
+
+  .page-header h1 em { font-style: italic; color: var(--red); }
+
+  .page-header-meta {
+    text-align: right;
+  }
+
+  .page-header-meta p {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #444;
+    text-transform: uppercase;
+    line-height: 2.2;
+  }
+
+  /* ── CLIENT SECTIONS ── */
+  .client-section {
+    border-bottom: 1px solid var(--border);
+    padding: 60px 48px;
+  }
+
+  .client-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .client-section-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -1px;
+  }
+
+  .client-section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .client-section-stat {
+    text-align: right;
+  }
+
+  .client-section-stat-n {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+  }
+
+  .client-section-stat-l {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #444;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ── VIDEO GRIDS ── */
+
+  /* YouTube branding overlay - hides top bar with channel name/pfp */
+  .video-item::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 40px;
+    background: var(--surface);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Large 2-col for landscape */
+  .video-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  /* 3-col for landscape */
+  .video-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  /* Mixed: 1 big + 2 small */
+  .video-grid-mixed {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  /* Shorts row — vertical aspect ratio */
+  .video-grid-shorts {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  /* ── VIDEO ITEM ── */
+  .video-item {
+    position: relative;
+    overflow: hidden;
+    background: var(--surface);
+    cursor: pointer;
+  }
+
+  /* Landscape 16:9 */
+  .video-item.landscape {
+    padding-bottom: 56.25%;
+  }
+
+  /* Square 1:1 */
+  .video-item.short {
+    padding-bottom: 100%;
+    height: 0;
+  }
+
+  .video-item iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .video-item-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .video-item:hover .video-item-overlay { opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 28px 48px;
+    background: #070707;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #111;
+  }
+
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: 8px;
+  }
+
+  .wordmark span { color: var(--red); }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: #2a2a2a;
+    letter-spacing: 2px;
+  }
+
+  /* lang */
+  [data-lang="en"] { display: none; }
+  [data-lang="it"] { display: block; }
+  span[data-lang="en"] { display: none; }
+  span[data-lang="it"] { display: inline; }
+  body.lang-en [data-lang="it"] { display: none; }
+  body.lang-en [data-lang="en"] { display: block; }
+  body.lang-en span[data-lang="it"] { display: none; }
+  body.lang-en span[data-lang="en"] { display: inline; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .page-header { padding: 48px 24px 40px; flex-direction: column; gap: 20px; align-items: flex-start; }
+    .client-section { padding: 40px 24px; }
+    .video-grid-2, .video-grid-3, .video-grid-mixed { grid-template-columns: 1fr; }
+    .video-grid-shorts { grid-template-columns: 1fr 1fr; }
+
+    footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
+  }
+
+  .block {
+    padding: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .video-grid-1 {
+    margin-top: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .block { padding: 24px; }
+  }
+
+
+  .video-item.placeholder {
+    background: var(--surface);
+    border: 1px dashed #2a2a2a;
+  }
+
+  .placeholder-inner {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .placeholder-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #2a2a2a;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">ADYY<span>.</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">
+      <span data-lang="en">Case Study</span>
+      <span data-lang="it">Case Study</span>
+    </a>
+    <div class="lang-btns">
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('it')">IT</button>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>
+    <span data-lang="en">Selected<br><em>Work.</em></span>
+    <span data-lang="it">Lavori<br><em>Selezionati.</em></span>
+  </h1>
+  <div class="page-header-meta">
+    <p>6 + 5 <span data-lang="en">videos</span><span data-lang="it">video</span></p>
+    <p>2022 — <span data-lang="en">Present</span><span data-lang="it">Presente</span></p>
+  </div>
+</div>
+
+<!-- LANDSCAPE -->
+<div class="block">
+  <div class="video-grid-3">
+    <div class="video-item landscape">
+      <iframe src="https://www.youtube.com/embed/xED1qGPSADY?rel=0&modestbranding=1" allowfullscreen loading="lazy" allow="autoplay"></iframe>
+    </div>
+    <div class="video-item landscape">
+      <iframe src="https://www.youtube.com/embed/Pk-P6-5_qd0?rel=0&modestbranding=1" allowfullscreen loading="lazy" allow="autoplay"></iframe>
+    </div>
+    <div class="video-item landscape">
+      <iframe src="https://www.youtube.com/embed/78lvKPUiRAQ?rel=0&modestbranding=1" allowfullscreen loading="lazy" allow="autoplay"></iframe>
+    </div>
+  </div>
+  <div class="video-grid-3">
+    <div class="video-item landscape placeholder">
+      <div class="placeholder-inner">
+        <span>Coming Soon</span>
+      </div>
+    </div>
+    <div class="video-item landscape placeholder">
+      <div class="placeholder-inner">
+        <span>Coming Soon</span>
+      </div>
+    </div>
+    <div class="video-item landscape placeholder">
+      <div class="placeholder-inner">
+        <span>Coming Soon</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SHORTS -->
+<div class="block">
+  <div class="video-grid-shorts">
+    <div class="video-item short">
+      <iframe src="https://www.youtube.com/embed/tgU9-Ehtoyg?rel=0&modestbranding=1" allowfullscreen loading="lazy" allow="autoplay"></iframe>
+    </div>
+    <div class="video-item short">
+      <iframe src="https://www.youtube.com/embed/RW4Nd2Fer7o?rel=0&modestbranding=1" allowfullscreen loading="lazy" allow="autoplay"></iframe>
+    </div>
+    <div class="video-item short">
+      <iframe src="https://www.youtube.com/embed/NNt6IxNWCPM?rel=0&modestbranding=1" allowfullscreen loading="lazy" allow="autoplay"></iframe>
+    </div>
+    <div class="video-item short">
+      <iframe src="https://www.youtube.com/embed/MaTxiJKpYHE?rel=0&modestbranding=1" allowfullscreen loading="lazy" allow="autoplay"></iframe>
+    </div>
+    <div class="video-item short">
+      <iframe src="https://www.youtube.com/embed/EFdJ4p4erYs?rel=0&modestbranding=1" allowfullscreen loading="lazy" allow="autoplay"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wordmark">ADYY<span>.</span></div>
+  <p>© 2025 · Milan</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
+    });
+  }
+</script>
+
+</body>
+</html>

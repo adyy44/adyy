@@ -1,3 +1,6 @@
+Work · HTML
+Copia
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -180,12 +183,20 @@
 
   /* ── VIDEO GRIDS ── */
 
-  /* YouTube branding overlay - hides top bar with channel name/pfp */
+  /* Hide YouTube topbar by pushing iframe up */
+  .video-item iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  /* Transparent overlay covering top-left corner (pfp + title area) */
   .video-item::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 40px;
+    top: 0; left: 0;
+    width: 70%; height: 48px;
     background: var(--surface);
     z-index: 2;
     pointer-events: none;
@@ -356,8 +367,8 @@
   <a href="index.html" class="nav-logo">ADYY<span>.</span></a>
   <div class="nav-right">
     <a href="index.html" class="nav-back">
-      <span data-lang="en">Case Study</span>
-      <span data-lang="it">Case Study</span>
+      <span data-lang="en">Homepage</span>
+      <span data-lang="it">Homepage</span>
     </a>
     <div class="lang-btns">
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -373,7 +384,6 @@
     <span data-lang="it">Lavori<br><em>Selezionati.</em></span>
   </h1>
   <div class="page-header-meta">
-    <p>6 + 5 <span data-lang="en">videos</span><span data-lang="it">video</span></p>
     <p>2022 — <span data-lang="en">Present</span><span data-lang="it">Presente</span></p>
   </div>
 </div>

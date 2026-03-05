@@ -191,17 +191,6 @@ Copia
     border: none;
   }
 
-  /* Transparent overlay covering top-left corner (pfp + title area) */
-  .video-item::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 70%; height: 48px;
-    background: var(--surface);
-    z-index: 2;
-    pointer-events: none;
-  }
-
   /* Large 2-col for landscape */
   .video-grid-2 {
     display: grid;
@@ -401,7 +390,7 @@ Copia
       <iframe src="https://www.youtube.com/embed/tgU9-Ehtoyg?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
-  <div class="video-grid-3" style="margin-top:12px;">
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px;">
     <div class="video-item landscape">
       <iframe src="https://www.youtube.com/embed/RW4Nd2Fer7o?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
     </div>
@@ -410,6 +399,9 @@ Copia
     </div>
     <div class="video-item landscape">
       <iframe src="https://www.youtube.com/embed/78lvKPUiRAQ?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="video-item landscape">
+      <iframe src="https://www.youtube.com/embed/Ue5PYNS7XCI?rel=0&modestbranding=1" allowfullscreen loading="lazy"></iframe>
     </div>
   </div>
 </div>
@@ -451,3 +443,5 @@ Copia
 
 </body>
 </html>
+
+

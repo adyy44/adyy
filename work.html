@@ -1,6 +1,3 @@
-Work · HTML
-Copia
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -308,7 +305,7 @@ Copia
     .client-section { padding: 40px 24px; }
     .video-grid-2, .video-grid-3, .video-grid-mixed { grid-template-columns: 1fr; }
     .video-grid-shorts { grid-template-columns: 1fr 1fr; }
-
+    .page-header { padding: 48px 24px 32px; flex-direction: column; gap: 12px; align-items: flex-start; }
     footer { padding: 20px 24px; flex-direction: column; gap: 8px; }
   }
 
@@ -322,7 +319,8 @@ Copia
   }
 
   @media (max-width: 768px) {
-    .block { padding: 24px; }
+    .block { padding: 20px; }
+    div[style*="grid-template-columns:repeat(4"] { grid-template-columns: 1fr !important; }
   }
 
 
@@ -443,5 +441,3 @@ Copia
 
 </body>
 </html>
-
-

@@ -481,9 +481,11 @@
     footer { flex-direction: column; gap: 12px; }
     .lang-bar { top: 16px; right: 16px; }
     .hero { padding: 40px 20px 0; }
-    .hero-img { width: 100%; height: 60vw; border-radius: 8px; object-fit: cover; object-position: left center; }
+    .hero-img { width: 100%; height: auto; border-radius: 8px; object-fit: contain; background: #0d0d0d; }
     .hero-right { width: 100%; flex-direction: column; gap: 16px; align-items: flex-start; padding: 24px 0 32px; }
     .hero-name { font-size: clamp(60px, 22vw, 120px); padding: 0; }
+    .hero-tagline { padding: 32px 24px; text-align: left; }
+    .hero-tagline-main { font-size: clamp(22px, 6vw, 40px); }
   }
 
   /* ── SCROLL REVEAL ── */
@@ -538,10 +540,40 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 40px 0 48px;
+    padding: 40px 0 0;
     width: 85%;
     opacity: 0;
     animation: fadeUp 0.9s ease forwards 0.2s;
+  }
+
+  .hero-tagline {
+    width: 100%;
+    padding: 48px 64px 64px;
+    text-align: center;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .hero-tagline-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-tagline-main {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 64px);
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .hero-tagline-main em {
+    font-style: italic;
+    color: var(--red);
   }
 
   .hero-left {
@@ -691,6 +723,11 @@
   </div>
   <div class="hero-name"><span>ADYY</span>.</div>
 </section>
+
+<div class="hero-tagline scroll-reveal">
+  <p class="hero-tagline-sub">Milan</p>
+  <p class="hero-tagline-main">Visual Communication<br><em>"Concept · Shooting · Editing"</em></p>
+</div>
 
 <!-- HEADER -->
 <section class="header">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ADYY</title>
+<title>The A2 Way</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -78,7 +78,7 @@
 
   .header::after {
     content: 'ADYY';
-    position: fit;
+    position: absolute;
     right: -60px;
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
@@ -469,7 +469,8 @@
   }
 
 
-@media (max-width: 768px) {
+
+  @media (max-width: 768px) {
     .header, section, footer { padding: 60px 24px; }
     .header { padding-top: 100px; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -480,13 +481,10 @@
     footer { flex-direction: column; gap: 12px; }
     .lang-bar { top: 16px; right: 16px; }
     .hero { padding: 40px 20px 0; }
-    .hero-img { width: 100%; height: auto; border-radius: 8px; object-fit: contain; background: 
-#0d0d0d; }
+    .hero-img { width: 100%; height: auto; border-radius: 8px; object-fit: contain; background: #0d0d0d; }
     .hero-right { width: 100%; flex-direction: column; gap: 16px; align-items: flex-start; padding: 24px 0 32px; }
     .hero-name { font-size: clamp(60px, 22vw, 120px); padding: 0; }
-
   }
-
 
   /* ── SCROLL REVEAL ── */
   .scroll-reveal {

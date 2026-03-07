@@ -483,10 +483,24 @@
     .hero { padding: 40px 20px 0; }
     .hero-img { width: 100%; height: auto; border-radius: 8px; object-fit: cover; object-position: left center; background: #0d0d0d; }
     .hero-right { width: 100%; flex-direction: column; gap: 16px; align-items: flex-start; padding: 24px 0 32px; }
-    .hero-name { font-size: clamp(60px, 22vw, 120px); padding: 0; text-align: center; }
+    .hero-name { font-size: clamp(60px, 22vw, 120px); padding: 0; text-align: center !important; width: 100% !important; }
+    .hero-name-wrap { width: 100%; }
+    .hero-name > *:not(span) { display: none; }
     .hero-tagline { padding: 32px 24px; text-align: left; }
     .hero-tagline-main { font-size: clamp(22px, 6vw, 40px); }
   }
+
+  .hero-name-wrap {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-name-ghost {
+    color: rgba(255,255,255,0.04) !important;
+    margin-top: -20px;
+  }
+
+  .hero-name-ghost span { color: rgba(255,255,255,0.04) !important; }
 
   .copy-btn {
     margin-top: 12px;
@@ -730,7 +744,10 @@
       <button class="copy-btn" onclick="navigator.clipboard.writeText('khaliladel44@gmail.com').then(()=>{this.textContent='✓ Copiata';setTimeout(()=>{this.textContent='Copia Email'},2000)})">Copia Email</button>
     </div>
   </div>
-  <div class="hero-name"><span>ADYY</span>.</div>
+  <div class="hero-name-wrap">
+    <div class="hero-name"><span>ADYY</span>.</div>
+    <div class="hero-name hero-name-ghost">ADYY.</div>
+  </div>
 </section>
 
 <div class="hero-tagline scroll-reveal">
@@ -741,17 +758,6 @@
   </p>
 </div>
 
-<!-- HEADER -->
-<section class="header">
-  <h1>
-    <span data-lang="en">Content<br>that <em>moves.</em></span>
-    <span data-lang="it">Contenuti<br>che <em>muovono.</em></span>
-  </h1>
-<div class="header-meta">
-    <p><span data-lang="en">Based in</span><span data-lang="it">Base</span>: <span>Milan, Italy</span></p>
-    <p><a href="mailto:khaliladel44@gmail.com" style="color:var(--red-light);text-decoration:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;">khaliladel44@gmail.com</a></p>
-  </div>
-</section>
 
 <!-- STAT BAR -->
 <div class="stat-bar scroll-reveal">

@@ -483,12 +483,30 @@
     .hero { padding: 40px 20px 0; }
     .hero-img { width: 100%; height: auto; border-radius: 8px; object-fit: cover; object-position: left center; background: #0d0d0d; }
     .hero-right { width: 100%; flex-direction: column; gap: 16px; align-items: flex-start; padding: 24px 0 32px; }
-    .hero-name { font-size: clamp(60px, 22vw, 120px); padding: 0; }
+    .hero-name { font-size: clamp(60px, 22vw, 120px); padding: 0; text-align: center; }
     .hero-tagline { padding: 32px 24px; text-align: left; }
     .hero-tagline-main { font-size: clamp(22px, 6vw, 40px); }
   }
 
-  /* ── SCROLL REVEAL ── */
+  .copy-btn {
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid #333;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .copy-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+  }
   .scroll-reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -706,19 +724,10 @@
 <section class="hero">
   <img class="hero-img" src="https://raw.githubusercontent.com/adyy44/adyy/main/hero.png" alt="" onerror="this.style.visibility='hidden'">
   <div class="hero-right">
-    <div>
-      <div class="hero-tag">
-        <span data-lang="en">Creative Direction · Milan</span>
-        <span data-lang="it">Direzione Creativa · Milano</span>
-      </div>
-      <p class="hero-desc">
-        <span data-lang="en">Concept · Shooting · Editing</span>
-        <span data-lang="it">Concept · Riprese · Montaggio</span>
-      </p>
-    </div>
     <div class="hero-meta">
       <p>Milan, Italy</p>
       <p><a href="mailto:khaliladel44@gmail.com">khaliladel44@gmail.com</a></p>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText('khaliladel44@gmail.com').then(()=>{this.textContent='✓ Copiata';setTimeout(()=>{this.textContent='Copia Email'},2000)})">Copia Email</button>
     </div>
   </div>
   <div class="hero-name"><span>ADYY</span>.</div>

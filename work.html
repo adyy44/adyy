@@ -6,13 +6,29 @@
 <title>ADYY — Lavori</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,700&family=DM+Mono:wght@400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <!--
-  Assets:
-  - If you open this file locally, relative paths look for files next to the HTML.
-  - If your images/videos are on GitHub Pages (recommended), set ASSET_BASE to that base URL.
-    Example: https://YOURUSER.github.io/YOURREPO
--->
 <script>window.ASSET_BASE = '';</script>
-  
+
+<style>
+:root {
+  --bg: #070707;
+  --fg: #f0ede6;
+  --red: #cc0000;
+  --dim: #0c0c0c;
+  --border: rgba(255,255,255,0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
 /* LOOP ROW (FIXED) */
 .loop-row {
   display: grid;
@@ -36,7 +52,26 @@
   border: 0;
 }
 
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(13,13,13,0.96);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 50px;
+}
 </style>
+    
+      
+      /* KEEP ALL YOUR OTHER CSS BELOW EXACTLY AS BEFORE */
+      
+      
+      </style>
 
   :root {
     --bg: #070707;

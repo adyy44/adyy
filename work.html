@@ -12,39 +12,28 @@
     Example: https://YOURUSER.github.io/YOURREPO
 -->
 <script>window.ASSET_BASE = '';</script>
-<style>
-
-
+  
+/* LOOP ROW (FIXED) */
 .loop-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 10px;
+  gap: 0;
+  padding: 0 10px 10px;
 }
 
 .loop-clip {
   position: relative;
-  aspect-ratio: 16 / 9;
-  background: #000;
   overflow: hidden;
+  background: #000;
+  aspect-ratio: 16/9;
 }
 
 .loop-clip iframe {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 177.77%;
-  height: 100%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.loop-clip video {
-  position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border: 0;
 }
 
 </style>

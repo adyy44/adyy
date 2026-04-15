@@ -13,6 +13,28 @@
 -->
 <script>window.ASSET_BASE = '';</script>
 <style>
+
+  .loop-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+}
+
+.loop-clip {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.loop-clip video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
   :root {
     --bg: #070707;
     --fg: #f0ede6;

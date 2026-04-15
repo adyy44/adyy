@@ -13,8 +13,9 @@
 -->
 <script>window.ASSET_BASE = '';</script>
 <style>
+<style>
 
-  .loop-row {
+.loop-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
@@ -27,23 +28,17 @@
   background: #000;
   overflow: hidden;
 }
-  <iframe 
-  src="https://www.youtube.com/embed/Uc66143x0TY?autoplay=1&mute=1&loop=1&playlist=Uc66143x0TY&controls=0&modestbranding=1&showinfo=0&rel=0"
-  frameborder="0"
-  allow="autoplay; encrypted-media"
-  allowfullscreen>
-</iframe>
-  <iframe ... style="border:0;"></iframe>
+
 .loop-clip iframe {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 177.77%; /* forces cover like object-fit */
+  width: 177.77%;
   height: 100%;
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-}
+
 .loop-clip video {
   position: absolute;
   inset: 0;
@@ -51,6 +46,9 @@
   height: 100%;
   object-fit: cover;
 }
+
+</style>
+
   :root {
     --bg: #070707;
     --fg: #f0ede6;

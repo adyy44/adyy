@@ -27,10 +27,16 @@
   background: #000;
   overflow: hidden;
 }
+  <iframe ... style="border:0;"></iframe>
 .loop-clip iframe {
-  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.77%; /* forces cover like object-fit */
   height: 100%;
-  object-fit: cover;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
 }
 .loop-clip video {
   position: absolute;

@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADYY</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070707;
+    --text: #f0ede6;
+    --red: #cc0000;
+    --red-light: #e60000;
+    --mid: #888;
+    --surface: #0c0c0c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+
+
+
+  /* LANG TOGGLE */
+  .lang-bar {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    z-index: 200;
+    display: flex;
+    gap: 2px;
+  }
+
+  .lang-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 8px 16px;
+    border: 1px solid #333;
+    background: var(--surface);
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .lang-btn.active {
+    background: var(--red);
+    color: #fff;
+    border-color: var(--red);
+    box-shadow: 0 0 16px rgba(204,0,0,0.3);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 0 64px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: 'ADYY';
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Playfair Display', serif;
+    font-size: 220px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.02);
+    white-space: nowrap;
+    letter-spacing: 20px;
+    pointer-events: none;
+  }
+
+  .header-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--red-light);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 9vw, 130px);
+    font-weight: 900;
+    color: #f0ede6;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    margin-bottom: 40px;
+
+  }
+
+  .header h1 em { font-style: italic; color: var(--red-light); }
+
+  .header-sub {
+    font-size: 15px;
+    color: #aaa;
+    max-width: 420px;
+    line-height: 1.8;
+
+  }
+
+  .header-meta {
+    position: absolute;
+    bottom: 48px;
+    right: 64px;
+    text-align: right;
+
+  }
+
+  .header-meta p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 2px;
+    line-height: 2;
+  }
+
+  .header-meta span { color: var(--red-light); }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    background: var(--red);
+    padding: 80px 64px;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .stat-bar::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+
+  .big-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px, 13vw, 180px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .big-num sup { font-size: 0.28em; vertical-align: super; }
+
+  .stat-bar-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .stat-bar-text p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    max-width: 380px;
+    line-height: 1.7;
+  }
+
+  /* ── SHARED ── */
+  section { padding: 100px 64px; }
+
+  .s-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .s-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 48px;
+  }
+
+  .s-title em { font-style: italic; color: var(--red); }
+
+
+
+
+
+  /* ── CLIENTS ── */
+  .clients-section { background: #030303; }
+
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .client-card {
+    border: 1px solid #222;
+    padding: 40px 32px;
+    background: linear-gradient(135deg, rgba(204,0,0,0.03) 0%, transparent 50%);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .client-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 3px; width: 0;
+    background: var(--red);
+    transition: width 0.4s ease;
+  }
+
+  .client-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+  .client-card:hover::before { width: 100%; }
+
+  .client-card.featured { background: var(--surface); border-color: var(--red); }
+  .client-card.featured::before { background: var(--red-light); }
+
+  .client-flag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .client-card.featured .client-flag { color: var(--red-light); }
+
+  .client-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .client-card.featured .client-name { color: #f0ede6; }
+
+  .client-location {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--mid);
+    margin-bottom: 24px;
+  }
+
+  .client-stat-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .client-card.featured .client-stat-big { color: var(--red-light); }
+
+  .client-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--mid);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .client-desc { font-size: 14px; color: #aaa; line-height: 1.7; font-weight: 400; }
+  .client-card.featured .client-desc { color: #aaa; }
+
+  .client-role {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--red);
+    color: #fff;
+    padding: 4px 10px;
+  }
+
+  .client-card.featured .client-role { background: var(--red-light); }
+
+  .client-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+    opacity: 0.45;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #888;
+  }
+
+  /* ── WHAT I DO ── */
+  .what-section { background: #060606; border-top: 1px solid #111; }
+
+  .what-header {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+
+  .what-header-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--red);
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  .what-header .s-title { margin-bottom: 0; }
+
+  /* folder rows */
+  .folder-list { border-top: 1px solid #141414; }
+
+  .folder-row {
+    border-bottom: 1px solid #141414;
+    overflow: hidden;
+  }
+
+  .folder-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 36px 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text);
+    gap: 24px;
+    transition: background 0.2s;
+    background: linear-gradient(90deg, rgba(204,0,0,0.025) 0%, transparent 50%);
+  }
+
+  .folder-trigger:hover { background: linear-gradient(90deg, rgba(204,0,0,0.06) 0%, transparent 60%); }
+  .folder-trigger:hover .folder-name { color: #fff; }
+
+  .folder-left {
+    display: flex;
+    align-items: baseline;
+    gap: 28px;
+  }
+
+  .folder-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #333;
+  }
+
+  .folder-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1;
+    transition: color 0.2s;
+    color: #ccc;
+    text-align: left;
+  }
+
+  .folder-arrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    color: var(--red);
+    transition: transform 0.35s ease;
+    flex-shrink: 0;
+  }
+
+  .folder-row.open .folder-arrow { transform: rotate(45deg); }
+  .folder-row.open .folder-name { color: #f0ede6; }
+
+  .folder-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s ease;
+  }
+
+  .folder-row.open .folder-body { grid-template-rows: 1fr; }
+
+  .folder-body-inner {
+    overflow: hidden;
+    display: flex;
+    gap: 0;
+    border-top: 1px solid #141414;
+  }
+
+  .folder-service {
+    flex: 1;
+    padding: 32px 0 40px;
+    border-right: 1px solid #141414;
+    padding-right: 40px;
+    padding-left: 0;
+  }
+
+  .folder-service:last-child { border-right: none; padding-right: 0; padding-left: 40px; }
+  .folder-service:first-child { padding-left: 0; }
+
+  .folder-service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .folder-service-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #444;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .folder-body-inner { flex-direction: column; }
+    .folder-service { border-right: none; border-bottom: 1px solid #141414; padding: 24px 0; }
+    .folder-service:last-child { border-bottom: none; padding-left: 0; }
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: var(--surface);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'A2';
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 500px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.015);
+    pointer-events: none;
+    letter-spacing: -30px;
+  }
+
+  .cta-section .s-label { color: var(--red); }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 100px);
+    font-weight: 900;
+    color: #f0ede6;
+    line-height: 0.95;
+    letter-spacing: -2px;
+    margin-bottom: 48px;
+  }
+
+  .cta-section h2 em { font-style: italic; color: var(--red-light); }
+
+  .cta-contact {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: #444;
+    letter-spacing: 3px;
+    line-height: 2.4;
+  }
+
+  .cta-contact a { color: var(--red-light); text-decoration: none; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 28px 64px;
+    background: #070707;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #111;
+  }
+
+  .wordmark {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #f0ede6;
+    letter-spacing: 8px;
+  }
+
+  .wordmark span { color: var(--red-light); }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: #2a2a2a;
+    letter-spacing: 2px;
+  }
+
+  ::selection { background: transparent; }
+  .work-btn-label { user-select: none; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+
+
+  @media (max-width: 768px) {
+    .header, section, footer { padding: 60px 24px; }
+    .header { padding-top: 100px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .clients-grid { grid-template-columns: 1fr; }
+    .what-grid { grid-template-columns: 1fr; }
+    .stat-bar { flex-direction: column; gap: 24px; }
+    .header::after { display: none; }
+    footer { flex-direction: column; gap: 12px; }
+    .lang-bar { top: 16px; right: 16px; }
+    .hero { padding: 40px 20px 0; }
+    .hero-img { width: 100%; height: auto; border-radius: 8px; object-fit: cover; object-position: left center; background: #0d0d0d; }
+    .hero-right { width: 100%; flex-direction: column; gap: 16px; align-items: center; padding: 24px 0 32px; text-align: center; }
+    .hero-name { font-size: clamp(60px, 22vw, 120px) !important; padding: 0 !important; margin: 0 auto !important; width: fit-content !important; display: block !important; }
+    .hero-name-wrap { width: 100%; display: flex !important; flex-direction: column; align-items: center; }
+    .hero-name > *:not(span) { display: none; }
+    .hero-tagline { padding: 32px 24px; text-align: left; }
+    .hero-tagline-main { font-size: clamp(22px, 6vw, 40px); }
+  }
+
+  .hero-name-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-name-ghost {
+    color: rgba(255,255,255,0.04) !important;
+    margin-top: -8px;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .hero-name-ghost span { color: rgba(255,255,255,0.04) !important; }
+
+  .copy-btn {
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid #333;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  .copy-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+  }
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+
+  [data-lang="en"] { display: none; }
+  [data-lang="it"] { display: block; }
+  span[data-lang="en"] { display: none; }
+  span[data-lang="it"] { display: inline; }
+  body.lang-en [data-lang="it"] { display: none; }
+  body.lang-en [data-lang="en"] { display: block; }
+  body.lang-en span[data-lang="it"] { display: none; }
+  body.lang-en span[data-lang="en"] { display: inline; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 64px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-img {
+    width: 85%;
+    height: 55vh;
+    object-fit: cover;
+    display: block;
+    background: #111;
+    border-radius: 12px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 28px 0 0;
+    width: 85%;
+  }
+
+  .hero-tagline {
+    width: 100%;
+    padding: 48px 64px 64px;
+    text-align: center;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .hero-tagline-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-tagline-main {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 64px);
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .hero-tagline-main em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .hero-left {
+    display: none;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #444;
+    text-transform: uppercase;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(80px, 18vw, 240px);
+    font-weight: 900;
+    line-height: 0.85;
+    letter-spacing: -4px;
+    color: #1a1a1a;
+    text-align: center;
+    width: fit-content;
+    padding: 0 64px;
+    margin: -20px auto 0;
+    display: block;
+  }
+
+  .hero-name span { color: var(--red); }
+
+  .hero-desc {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.8;
+    max-width: 320px;
+    margin-bottom: 32px;
+  }
+
+  .hero-video-wrap {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+  }
+
+  .hero-video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .hero-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: #444;
+    letter-spacing: 2px;
+    line-height: 2;
+    text-align: center;
+  }
+
+  .hero-meta a { color: var(--red-light); text-decoration: none; }
+
+  /* ── WORK BUTTON ── */
+  .work-cta {
+    background: var(--bg);
+    padding: 80px 64px;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+  }
+
+  .work-btn {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text);
+    border: 1px solid #333;
+    padding: 20px 56px;
+    text-decoration: none;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .work-btn::after {
+    content: '→';
+    margin-left: 16px;
+  }
+
+  .work-btn:hover {
+    background: var(--red);
+    border-color: var(--red);
+    color: #fff;
+    box-shadow: 0 0 40px rgba(204,0,0,0.25), 0 0 80px rgba(204,0,0,0.1);
+  }
+
+  .work-btn-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #333;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { height: 50vh; }
+    .hero-right { padding: 48px 24px; }
+    .work-cta { padding: 60px 24px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn active" onclick="setLang('it')">IT</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-img" src="https://raw.githubusercontent.com/adyy44/adyy/main/hero.png" alt="" onerror="this.style.visibility='hidden'">
+  <div class="hero-right">
+    <div class="hero-meta">
+      <p>Milano, Italy</p>
+      <p><a href="mailto:khaliladel44@gmail.com">khaliladel44@gmail.com</a></p>
+      <button class="copy-btn" onclick="navigator.clipboard.writeText('khaliladel44@gmail.com').then(()=>{this.textContent='✓ Copiata';setTimeout(()=>{this.textContent='Copia Email'},2000)})">Copia Email</button>
+    </div>
+  </div>
+  <div class="hero-name-wrap">
+    <div class="hero-name"><span>ADYY</span>.</div>
+    <div class="hero-name hero-name-ghost">ADYY.</div>
+  </div>
+</section>
+
+<div class="hero-tagline scroll-reveal">
+  <p class="hero-tagline-sub">Milano</p>
+  <p class="hero-tagline-main">
+    <span data-lang="en">Visual Communication<br><em>"Concept · Shooting · Editing"</em></span>
+    <span data-lang="it">Comunicazione Visiva<br><em>"Concept · Riprese · Montaggio"</em></span>
+  </p>
+</div>
+
+
+<!-- STAT BAR -->
+<div class="stat-bar scroll-reveal">
+  <div class="big-num">59<sup>M+</sup></div>
+  <div class="stat-bar-text">
+    <h2>
+      <span data-lang="en">Total views on a single client's TikTok</span>
+      <span data-lang="it">Visualizzazioni totali sull'account TikTok di un singolo cliente</span>
+    </h2>
+    <p>
+      <span data-lang="en">Through video editing and creative strategy — turning raw footage into consistently viral short-form content.</span>
+    </p>
+  </div>
+</div>
+
+
+
+<!-- CLIENTS -->
+<section class="clients-section scroll-reveal">
+  <div class="s-label">
+    <span data-lang="en">Selected clients</span>
+    <span data-lang="it">Clienti selezionati</span>
+  </div>
+  <div class="s-title">
+    <span data-lang="en">Who I've <em>Worked With</em></span>
+    <span data-lang="it">Con chi ho <em>Lavorato</em></span>
+  </div>
+  <div class="clients-grid">
+
+    <div class="client-card featured">
+      <div class="client-flag">Italy · Jewelry · TikTok</div>
+      <div class="client-name">Caducci</div>
+      <div class="client-location">Milan, Italy</div>
+      <div class="client-stat-big">45.1M</div>
+      <div class="client-stat-label"><span data-lang="en">views · top video</span><span data-lang="it">views · video più visto</span></div>
+      <p class="client-desc">
+        <span data-lang="en">One of the most viral jewelry brands on TikTok. A 45M view video, dozens above 1M — growth built on strong visual content and cinematic rhythm.</span>
+        <span data-lang="it">Uno dei brand di gioielli più virali su TikTok. Un video da 45M di views, decine sopra il milione — crescita costruita su contenuto visivo forte e ritmo cinematografico.</span>
+      </p>
+      <div class="client-role"><span data-lang="en">Creative Strategy · Video Editor</span><span data-lang="it">Strategia Creativa · Video Editor</span></div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-flag">Netherlands · Merch & Branding</div>
+      <div class="client-name">Monday Merch</div>
+      <div class="client-location">Rotterdam, Netherlands</div>
+      <div class="client-stat-big" style="font-size:28px;line-height:1.3;margin-bottom:8px;">Forbes<br>30 Under 30</div>
+      <div class="client-stat-label"><span data-lang="en">founders · €500K raised in year one</span><span data-lang="it">fondatori · €500K raccolti nel primo anno</span></div>
+      <p class="client-desc">
+        <span data-lang="en">Startup of the year, marketing department. Clients include The North Face, Uber, Spotify, Hyundai, eBay and Deliveroo. €500k raised in the first year.</span>
+        <span data-lang="it">Startup dell'anno, dipartimento marketing. Clienti come The North Face, Uber, Spotify, Hyundai, eBay e Deliveroo. €500k raccolti nel primo anno.</span>
+      </p>
+      <div class="client-logos">
+        <span>POLAROID</span><span>·</span><span>UBER</span><span>·</span><span>SPOTIFY</span><span>·</span><span>HYUNDAI</span><span>·</span><span>EBAY</span><span>·</span><span>DELIVEROO</span>
+      </div>
+      <div class="client-role"><span data-lang="en">Creative Strategy · Visual Direction</span><span data-lang="it">Strategia Creativa · Direzione Visiva</span></div>
+    </div>
+
+    <div class="client-card">
+      <div class="client-flag">Finland · Hair Care · Advertising</div>
+      <div class="client-name">FourReasons</div>
+      <div class="client-location">Finland · 15 Countries</div>
+      <div class="client-stat-big">€298M</div>
+      <div class="client-stat-label"><span data-lang="en">group turnover · #1 salon brand in Finland</span><span data-lang="it">fatturato di gruppo · #1 brand salon in Finlandia</span></div>
+      <p class="client-desc">
+        <span data-lang="en">Creative strategy and advertising content for Finland's #1 salon cosmetics brand — used by half of all Finnish women, distributed across 15 countries.</span>
+        <span data-lang="it">Strategia creativa e contenuti pubblicitari per brand di cosmesi professionale #1 in Finlandia, distribuito in 15 paesi.</span>
+      </p>
+      <div class="client-role"><span data-lang="en">Creative Strategy · Video Editor</span><span data-lang="it">Strategia Creativa · Video Editor</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHAT I DO -->
+<section class="what-section scroll-reveal">
+  <div class="what-header">
+    <span class="what-header-num">03</span>
+    <div class="s-title">What I <em>Do.</em></div>
+  </div>
+  <div class="folder-list">
+
+    <!-- PRE-PRODUZIONE -->
+    <div class="folder-row" id="folder-pre">
+      <button class="folder-trigger" onclick="toggleFolder('folder-pre')">
+        <div class="folder-left">
+          <span class="folder-num">01</span>
+          <span class="folder-name">
+            <span data-lang="en">Pre-Production</span>
+            <span data-lang="it">Pre-Produzione</span>
+          </span>
+        </div>
+        <span class="folder-arrow">+</span>
+      </button>
+      <div class="folder-body">
+        <div class="folder-body-inner">
+          <div class="folder-service">
+            <div class="folder-service-name">Strategia</div>
+            <div class="folder-service-desc">Posizionamento, contenuti,<br>(l'angolo che si allinea e ferma lo scroll)</div>
+          </div>
+          <div class="folder-service">
+            <div class="folder-service-name">Direzione</div>
+          </div>
+          <div class="folder-service">
+            <div class="folder-service-name">Shooting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POST-PRODUZIONE -->
+    <div class="folder-row" id="folder-post">
+      <button class="folder-trigger" onclick="toggleFolder('folder-post')">
+        <div class="folder-left">
+          <span class="folder-num">02</span>
+          <span class="folder-name">
+            <span data-lang="en">Post-Production</span>
+            <span data-lang="it">Post-Produzione</span>
+          </span>
+        </div>
+        <span class="folder-arrow">+</span>
+      </button>
+      <div class="folder-body">
+        <div class="folder-body-inner">
+          <div class="folder-service">
+            <div class="folder-service-name">Color</div>
+          </div>
+          <div class="folder-service">
+            <div class="folder-service-name">Editing</div>
+            <div class="folder-service-desc">Ritmo, tagli, struttura, audio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORK CTA -->
+<div class="work-cta">
+  <p class="work-btn-label">
+    <span data-lang="en">Selected work</span>
+    <span data-lang="it">I lavori</span>
+  </p>
+  <a href="work.html" class="work-btn">
+    <span data-lang="en">View Work</span>
+    <span data-lang="it">Guarda i Lavori</span>
+  </a>
+</div>
+
+<!-- CTA -->
+<section class="cta-section scroll-reveal">
+  <div class="s-label">
+    <span data-lang="en">Let's work together</span>
+    <span data-lang="it">Lavoriamo insieme</span>
+  </div>
+  <div class="cta-contact">
+    <p><a href="mailto:khaliladel44@gmail.com">khaliladel44@gmail.com</a></p>
+    <p>Milano, Italy</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wordmark">ADYY<span>.</span></div>
+  <p>© 2026 · Milano</p>
+</footer>
+<script>
+  function toggleFolder(id) {
+    const row = document.getElementById(id);
+    row.classList.toggle('open');
+  }
+
+  function setLang(lang) {
+    document.body.classList.toggle('lang-en', lang === 'en');
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.trim() === lang.toUpperCase());
+    });
+  }
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
